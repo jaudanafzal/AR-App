@@ -3,14 +3,19 @@ package com.example.testappjava;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.view.View.OnClickListener;
+import android.widget.TextView;
 
 import com.google.ar.core.Anchor;
 import com.google.ar.core.Frame;
@@ -59,19 +64,60 @@ class ModelLoader {
 }
 
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity{
 
     private ArFragment fragment;
     private PointerDrawable pointer = new PointerDrawable();
     private boolean isTracking;
     private boolean isHitting;
+    private boolean isChecked = false;
     private ModelLoader modelLoader;
     private Button button;
+    private TextView tv;
+    private ImageView iv;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_splash);
+
+        tv = (TextView) findViewById(R.id.tv);
+        iv = (ImageView) findViewById(R.id.iv);
+
+        Animation myanim = AnimationUtils.loadAnimation(this, R.anim.transition);
+        tv.startAnimation(myanim);
+        iv.startAnimation(myanim);
+        
         setContentView(R.layout.activity_main);
+
+        Button mShowDialog = (Button) findViewById(R.id.chipShowDialog);
+        mShowDialog.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public  void onClick(View v) {
+                AlertDialog.Builder mBuilder = new AlertDialog.Builder(MainActivity.this);
+                mBuilder.setTitle("Description 1");
+                mBuilder.setMessage("test");
+                mBuilder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int which) {
+                        dialogInterface.dismiss();
+                    }
+                });
+
+                AlertDialog alertDialog = mBuilder.create();
+                alertDialog.show();
+            }
+        });
+
+        Button mShowDialog2 = (Button) findViewById(R.id.button2);
+        mShowDialog2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public  void onClick(View v) {
+                System.out.println("Clicked");
+                initializeGallery_two();
+            }
+        });
 
         fragment = (ArFragment)
                 getSupportFragmentManager().findFragmentById(R.id.sceneform_fragment);
@@ -180,6 +226,39 @@ public class MainActivity extends AppCompatActivity {
         face.setImageResource(R.drawable.igloo_thumb);
         face.setContentDescription("face");
         face.setOnClickListener(view ->{addObject(Uri.parse("face2.sfb"));});
+        gallery.addView(face);
+
+
+    }
+
+
+    public void initializeGallery_two(){
+        LinearLayout gallery = findViewById(R.id.gallery_layout);
+
+        ImageView face = new ImageView(this);
+        face.setImageResource(R.drawable.igloo_thumb);
+        face.setContentDescription("face");
+        face.setOnClickListener(view ->{addObject(Uri.parse("face3.sfb"));});
+        gallery.addView(face);
+    }
+
+    public void initializeGallery_three(){
+        LinearLayout gallery = findViewById(R.id.gallery_layout);
+
+        ImageView face = new ImageView(this);
+        face.setImageResource(R.drawable.igloo_thumb);
+        face.setContentDescription("face");
+        face.setOnClickListener(view ->{addObject(Uri.parse("face3.sfb"));});
+        gallery.addView(face);
+    }
+
+    public void initializeGallery_four(){
+        LinearLayout gallery = findViewById(R.id.gallery_layout);
+
+        ImageView face = new ImageView(this);
+        face.setImageResource(R.drawable.igloo_thumb);
+        face.setContentDescription("face");
+        face.setOnClickListener(view ->{addObject(Uri.parse("face3.sfb"));});
         gallery.addView(face);
     }
 

@@ -9,7 +9,9 @@ import android.widget.ListView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.scaledrone.lib.Listener;
 import com.scaledrone.lib.Room;
@@ -18,7 +20,7 @@ import com.scaledrone.lib.Scaledrone;
 
 import java.util.Random;
 
-public class StartActivity extends AppCompatActivity implements RoomListener {
+public class StartActivity extends MainActivity implements RoomListener {
 
     // replace this with a real channelID from Scaledrone dashboard
     private String channelID = "0esgwuVPGxALjCoV";
@@ -28,6 +30,7 @@ public class StartActivity extends AppCompatActivity implements RoomListener {
     private MessageAdapter messageAdapter;
     private ListView messagesView;
     //private ImageButton sendButton;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -89,9 +92,17 @@ public class StartActivity extends AppCompatActivity implements RoomListener {
         System.err.println(ex);
     }
 
+    @JsonIgnoreProperties(ignoreUnknown = true)
     @Override
     public void onMessage(Room room, com.scaledrone.lib.Message receivedMessage) {
+        String message2 = editText.getText().toString();
+        if (message2.equals("")) {
+            initializeGallery_three();
+        } if (message2.equals("")) {
+            initializeGallery_four();
+        }
         final ObjectMapper mapper = new ObjectMapper();
+        mapper.disable(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES);
         try {
             final MemberData data = mapper.treeToValue(receivedMessage.getMember().getClientData(), MemberData.class);
             boolean belongsToCurrentUser = receivedMessage.getClientID().equals(scaledrone.getClientID());
@@ -107,6 +118,8 @@ public class StartActivity extends AppCompatActivity implements RoomListener {
             e.printStackTrace();
         }
     }
+
+
 
     private String getRandomName() {
         String[] adjs = {"autumn", "hidden", "bitter", "misty", "silent", "empty", "dry", "dark", "summer", "icy", "delicate", "quiet", "white", "cool", "spring", "winter", "patient", "twilight", "dawn", "crimson", "wispy", "weathered", "blue", "billowing", "broken", "cold", "damp", "falling", "frosty", "green", "long", "late", "lingering", "bold", "little", "morning", "muddy", "old", "red", "rough", "still", "small", "sparkling", "throbbing", "shy", "wandering", "withered", "wild", "black", "young", "holy", "solitary", "fragrant", "aged", "snowy", "proud", "floral", "restless", "divine", "polished", "ancient", "purple", "lively", "nameless"};
@@ -127,9 +140,12 @@ public class StartActivity extends AppCompatActivity implements RoomListener {
         return sb.toString().substring(0, 7);
     }
 
-    public class MemberData {
+
+
+    public static class MemberData {
         private String name;
         private String color;
+
 
         public MemberData(String name, String color) {
             this.name = name;
@@ -147,6 +163,14 @@ public class StartActivity extends AppCompatActivity implements RoomListener {
 
         public String getColor() {
             return color;
+        }
+
+        @Override
+        public String toString() {
+            return "MemberData{" +
+                    "name='" + name + '\'' +
+                    ", color='" + color + '\'' +
+                    '}';
         }
 
 

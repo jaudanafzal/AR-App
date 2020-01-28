@@ -7,38 +7,83 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
-    
+
     <fragment
         android:id="@+id/sceneform_fragment"
         android:name="com.google.ar.sceneform.ux.ArFragment"
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
         android:layout_height="0dp"
+        app:layout_constraintBottom_toTopOf="@+id/gallery_layout"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.45"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toTopOf="@id/gallery_layout"
-        app:layout_constraintVertical_chainStyle="spread"
-        app:layout_constraintVertical_weight="9"
-        tools:showIn="@layout/activity_main"
-        />
+        app:layout_constraintVertical_bias="1.0"
+        tools:showIn="@layout/activity_main" />
 
     <LinearLayout
         android:id="@+id/gallery_layout"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
+        android:layout_width="0dp"
+        android:layout_height="73dp"
         android:orientation="horizontal"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/sceneform_fragment"
-        app:layout_constraintVertical_chainStyle="spread"
-        app:layout_constraintVertical_weight="1"/>
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/sceneform_fragment" />
 
 
     <Button
         android:id="@+id/Button2"
-        android:layout_width="wrap_content"
-        android:layout_height="121dp"
-        android:text="Open Activity 2"
-        tools:ignore="MissingConstraints"
-        tools:layout_editor_absoluteX="0dp"
-        tools:layout_editor_absoluteY="537dp" />
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="16dp"
+        android:background="@drawable/chat_button"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toEndOf="@+id/sceneform_fragment"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="MissingConstraints" />
+
+    <Button
+        android:id="@+id/chipShowDialog"
+        android:layout_width="45dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginBottom="8dp"
+        android:text="1"
+        app:layout_constraintBottom_toBottomOf="@+id/sceneform_fragment"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:ignore="MissingConstraints" />
+
+    <Button
+        android:id="@+id/chip2"
+        android:layout_width="45dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="16dp"
+        android:layout_marginBottom="8dp"
+        android:text="2"
+        app:layout_constraintBottom_toBottomOf="@+id/sceneform_fragment"
+        app:layout_constraintStart_toEndOf="@+id/chipShowDialog"
+        tools:ignore="MissingConstraints" />
+
+    <Button
+
+        android:id="@+id/button2"
+        android:layout_width="88dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="950dp"
+        android:layout_marginEnd="500dp"
+        android:background="@android:color/transparent"
+        android:text=""
+        android:visibility="visible"
+        app:layout_constraintBottom_toTopOf="@+id/sceneform_fragment"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.425"
+        app:layout_constraintStart_toEndOf="@+id/sceneform_fragment"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.642" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

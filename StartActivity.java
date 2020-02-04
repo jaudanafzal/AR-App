@@ -79,6 +79,16 @@ public class StartActivity extends MainActivity implements RoomListener {
             System.out.println(message);
             scaledrone.publish(roomName, message);
             editText.getText().clear();
+        } if (message.equals("Hey")) {
+            System.out.println(message);
+            scaledrone.publish(roomName, message);
+            editText.getText().clear();
+            //initializeGallery_three();
+        } if (message.equals("Have you heard?")) {
+            System.out.println(message);
+            scaledrone.publish(roomName, message);
+            editText.getText().clear();
+            initializeGallery_four();
         }
     }
 
@@ -95,12 +105,12 @@ public class StartActivity extends MainActivity implements RoomListener {
     @JsonIgnoreProperties(ignoreUnknown = true)
     @Override
     public void onMessage(Room room, com.scaledrone.lib.Message receivedMessage) {
-        String message2 = editText.getText().toString();
-        if (message2.equals("")) {
+       /* String message2 = editText.getText().toString();
+        if (message2.equals("Hey")) {
             initializeGallery_three();
-        } if (message2.equals("")) {
+        } if (message2.equals("Have you heard?")) {
             initializeGallery_four();
-        }
+        }*/
         final ObjectMapper mapper = new ObjectMapper();
         mapper.disable(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES);
         try {

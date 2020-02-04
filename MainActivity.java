@@ -12,6 +12,7 @@ import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.view.View.OnClickListener;
@@ -72,6 +73,7 @@ public class MainActivity extends AppCompatActivity{
     private boolean isHitting;
     private boolean isChecked = false;
     private ModelLoader modelLoader;
+    private EditText editText;
     private Button button;
     private TextView tv;
     private ImageView iv;
@@ -80,16 +82,10 @@ public class MainActivity extends AppCompatActivity{
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_splash);
-
-        tv = (TextView) findViewById(R.id.tv);
-        iv = (ImageView) findViewById(R.id.iv);
-
-        Animation myanim = AnimationUtils.loadAnimation(this, R.anim.transition);
-        tv.startAnimation(myanim);
-        iv.startAnimation(myanim);
-        
         setContentView(R.layout.activity_main);
+
+        editText = (EditText) findViewById(R.id.editText);
+
 
         Button mShowDialog = (Button) findViewById(R.id.chipShowDialog);
         mShowDialog.setOnClickListener(new View.OnClickListener() {
@@ -110,8 +106,84 @@ public class MainActivity extends AppCompatActivity{
             }
         });
 
-        Button mShowDialog2 = (Button) findViewById(R.id.button2);
+        Button mShowDialog2 = (Button) findViewById(R.id.chip2);
         mShowDialog2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public  void onClick(View v) {
+                AlertDialog.Builder mBuilder = new AlertDialog.Builder(MainActivity.this);
+                mBuilder.setTitle("Description 2");
+                mBuilder.setMessage("test");
+                mBuilder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int which) {
+                        dialogInterface.dismiss();
+                    }
+                });
+
+                AlertDialog alertDialog = mBuilder.create();
+                alertDialog.show();
+            }
+        });
+
+        Button mShowDialog3 = (Button) findViewById(R.id.chip3);
+        mShowDialog3.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public  void onClick(View v) {
+                AlertDialog.Builder mBuilder = new AlertDialog.Builder(MainActivity.this);
+                mBuilder.setTitle("Description 3");
+                mBuilder.setMessage("test");
+                mBuilder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int which) {
+                        dialogInterface.dismiss();
+                    }
+                });
+
+                AlertDialog alertDialog = mBuilder.create();
+                alertDialog.show();
+            }
+        });
+
+        Button mShowDialog4 = (Button) findViewById(R.id.chip4);
+        mShowDialog4.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public  void onClick(View v) {
+                AlertDialog.Builder mBuilder = new AlertDialog.Builder(MainActivity.this);
+                mBuilder.setTitle("Description 4");
+                mBuilder.setMessage("test");
+                mBuilder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int which) {
+                        dialogInterface.dismiss();
+                    }
+                });
+
+                AlertDialog alertDialog = mBuilder.create();
+                alertDialog.show();
+            }
+        });
+
+        Button mShowDialog5 = (Button) findViewById(R.id.chip6);
+        mShowDialog5.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public  void onClick(View v) {
+                AlertDialog.Builder mBuilder = new AlertDialog.Builder(MainActivity.this);
+                mBuilder.setTitle("Description 5");
+                mBuilder.setMessage("test");
+                mBuilder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int which) {
+                        dialogInterface.dismiss();
+                    }
+                });
+
+                AlertDialog alertDialog = mBuilder.create();
+                alertDialog.show();
+            }
+        });
+
+        Button mShowButton = (Button) findViewById(R.id.button2);
+        mShowButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public  void onClick(View v) {
                 System.out.println("Clicked");
@@ -137,6 +209,15 @@ public class MainActivity extends AppCompatActivity{
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(MainActivity.this, StartActivity.class));
+            }
+        });
+
+        Button btn2 = (Button)findViewById(R.id.chip5);
+
+        btn2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(MainActivity.this, EmptyActivity.class));
             }
         });
     }
@@ -233,6 +314,7 @@ public class MainActivity extends AppCompatActivity{
 
 
     public void initializeGallery_two(){
+        System.err.println("Worked");
         LinearLayout gallery = findViewById(R.id.gallery_layout);
 
         ImageView face = new ImageView(this);
@@ -243,8 +325,8 @@ public class MainActivity extends AppCompatActivity{
     }
 
     public void initializeGallery_three(){
+        System.err.println("Worked2");
         LinearLayout gallery = findViewById(R.id.gallery_layout);
-
         ImageView face = new ImageView(this);
         face.setImageResource(R.drawable.igloo_thumb);
         face.setContentDescription("face");
@@ -253,8 +335,8 @@ public class MainActivity extends AppCompatActivity{
     }
 
     public void initializeGallery_four(){
+        System.err.println("Worked3");
         LinearLayout gallery = findViewById(R.id.gallery_layout);
-
         ImageView face = new ImageView(this);
         face.setImageResource(R.drawable.igloo_thumb);
         face.setContentDescription("face");

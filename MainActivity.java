@@ -31,6 +31,7 @@ import com.google.ar.sceneform.ux.TransformableNode;
 
 import java.lang.ref.WeakReference;
 import java.util.List;
+import java.util.Objects;
 
 class ModelLoader {
     private final WeakReference<MainActivity> owner;
@@ -71,12 +72,16 @@ public class MainActivity extends AppCompatActivity{
     private PointerDrawable pointer = new PointerDrawable();
     private boolean isTracking;
     private boolean isHitting;
+    private LinearLayout LinearLayout;
+    private Button SavedInstance;
     private boolean isChecked = false;
     private ModelLoader modelLoader;
     private EditText editText;
     private Button button;
     private TextView tv;
     private ImageView iv;
+    boolean neck = true;
+    boolean leg = false;
 
 
     @Override
@@ -85,6 +90,8 @@ public class MainActivity extends AppCompatActivity{
         setContentView(R.layout.activity_main);
 
         editText = (EditText) findViewById(R.id.editText);
+        LinearLayout = (LinearLayout) findViewById(R.id.gallery_layout);
+        SavedInstance = (Button) findViewById(R.id.button3);
 
 
         Button mShowDialog = (Button) findViewById(R.id.chipShowDialog);
@@ -243,6 +250,9 @@ public class MainActivity extends AppCompatActivity{
         }
     }
 
+
+
+
     private boolean updateTracking() {
         Frame frame = fragment.getArSceneView().getArFrame();
         boolean wasTracking = isTracking;
@@ -315,33 +325,34 @@ public class MainActivity extends AppCompatActivity{
 
     public void initializeGallery_two(){
         System.err.println("Worked");
-        LinearLayout gallery = findViewById(R.id.gallery_layout);
-
         ImageView face = new ImageView(this);
         face.setImageResource(R.drawable.igloo_thumb);
         face.setContentDescription("face");
         face.setOnClickListener(view ->{addObject(Uri.parse("face3.sfb"));});
-        gallery.addView(face);
+        LinearLayout.addView(face);
     }
 
     public void initializeGallery_three(){
         System.err.println("Worked2");
-        LinearLayout gallery = findViewById(R.id.gallery_layout);
+        boolean neck = false;
         ImageView face = new ImageView(this);
-        face.setImageResource(R.drawable.igloo_thumb);
+        face.setImageResource(R.drawable.house_thumb);
         face.setContentDescription("face");
         face.setOnClickListener(view ->{addObject(Uri.parse("face3.sfb"));});
-        gallery.addView(face);
+        LinearLayout.addView(face);
+        System.err.println("Worked2.5");
     }
+
 
     public void initializeGallery_four(){
         System.err.println("Worked3");
-        LinearLayout gallery = findViewById(R.id.gallery_layout);
+        boolean leg = true;
         ImageView face = new ImageView(this);
         face.setImageResource(R.drawable.igloo_thumb);
         face.setContentDescription("face");
         face.setOnClickListener(view ->{addObject(Uri.parse("face3.sfb"));});
-        gallery.addView(face);
+        face = Objects.requireNonNull(face);
+        LinearLayout.addView(face);
     }
 
     private void addObject(Uri model) {
@@ -361,6 +372,17 @@ public class MainActivity extends AppCompatActivity{
             }
         }
     }
+
+    @Override
+    public void onResume(){
+        super.onResume();
+        if (neck == false) {
+            initializeGallery_three();
+        } if (leg == true) {
+            initializeGallery_four();
+        }
+    }
+
 
     public void addNodeToScene(Anchor anchor, ModelRenderable renderable) {
         AnchorNode anchorNode = new AnchorNode(anchor);

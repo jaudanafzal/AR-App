@@ -1,5 +1,6 @@
 package com.example.testappjava;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -71,6 +72,15 @@ public class StartActivity extends MainActivity implements RoomListener {
                 System.err.println(reason);
             }
         });
+
+        Button btn = (Button)findViewById(R.id.button5);
+
+        btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(StartActivity.this, MainActivity.class));
+            }
+        });
     }
 
     public void sendMessage(View view) {
@@ -83,7 +93,7 @@ public class StartActivity extends MainActivity implements RoomListener {
             System.out.println(message);
             scaledrone.publish(roomName, message);
             editText.getText().clear();
-            //initializeGallery_three();
+            initializeGallery_three();
         } if (message.equals("Have you heard?")) {
             System.out.println(message);
             scaledrone.publish(roomName, message);
